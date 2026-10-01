@@ -2,6 +2,7 @@
 from flask import Flask, jsonify, request
 import requests
 
+
 app = Flask(__name__)
 
 # Temporary inventory storage.
