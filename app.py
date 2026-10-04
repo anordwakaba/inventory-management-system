@@ -3,23 +3,26 @@ import requests
 
 app = Flask(__name__)
 
+
 inventory = [
     {
         "id": 1,
         "name": "Organic Almond Milk",
         "price": 350.0,
-        "quantity": 10,
+        "quantity": 12,
         "barcode": "3017620422003",
         "brand": "Silk"
     },
+
     {
         "id": 2,
-        "name": "Whole Wheat Bread",
-        "price": 120.0,
-        "quantity": 20,
+        "name": "Wheat Bread",
+        "price": 1000.0,
+        "quantity": 12,
         "barcode": "",
         "brand": "Local Bakery"
     }
+    
 ]
 
 
