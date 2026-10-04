@@ -10,6 +10,7 @@ def client():
     original_inventory = [item.copy() for item in inventory]
     app.config["TESTING"] = True
 
+
     with app.test_client() as test_client:
         yield test_client
 
@@ -22,10 +23,12 @@ def test_home(client):
     assert response.status_code == 200
 
 
+
 def test_get_inventory(client):
     response = client.get("/inventory")
     assert response.status_code == 200
     assert isinstance(response.get_json(), list)
+
 
 
 def test_get_one_item(client):
@@ -34,9 +37,11 @@ def test_get_one_item(client):
     assert response.get_json()["id"] == 1
 
 
+
 def test_missing_item(client):
     response = client.get("/inventory/9999")
     assert response.status_code == 404
+
 
 
 def test_add_item(client):
@@ -45,6 +50,7 @@ def test_add_item(client):
         "price": 200,
         "quantity": 15
     })
+
 
     assert response.status_code == 201
     assert response.get_json()["name"] == "Rice"
@@ -59,12 +65,14 @@ def test_add_item_without_name(client):
     assert response.status_code == 400
 
 
+
 def test_reject_negative_price(client):
     response = client.post("/inventory", json={
         "name": "Sugar",
         "price": -10,
         "quantity": 5
     })
+
 
     assert response.status_code == 400
 
@@ -75,9 +83,11 @@ def test_update_item(client):
         "quantity": 5
     })
 
+
     assert response.status_code == 200
     assert response.get_json()["price"] == 400
     assert response.get_json()["quantity"] == 5
+
 
 
 def test_update_missing_item(client):
@@ -183,6 +193,7 @@ def test_import_product_not_found(mock_get, client):
     response = client.post("/external/import/000000000")
 
     assert response.status_code == 404
+
 
 
 def test_cli_has_menu():
